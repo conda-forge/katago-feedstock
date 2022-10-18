@@ -8,6 +8,7 @@ if "%cuda_compiler_version%" == "None" (
     set KATAGO_BACKEND="CUDA"
     set build_with_cuda=1
     set USE_CUDA=1
+    set CUDA_VERSION=%cuda_compiler_version%
     set desired_cuda=%CUDA_VERSION:~0,-1%.%CUDA_VERSION:~-1,1%
 )
 
@@ -26,6 +27,9 @@ IF "%build_with_cuda%" == "" goto cuda_end
 
 set "PATH=%CUDA_BIN_PATH%;%PATH%"
 set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
+
+for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")
+set "NVCC=%NVCC% --use-local-env"
 echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"
 
 :cuda_end
