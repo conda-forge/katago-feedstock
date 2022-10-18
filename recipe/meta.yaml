@@ -12,6 +12,8 @@ source:
     # NOTE(hadim): conda-forge uses it's own build of Clang (rather than using the system's AppleClang)
     # But the package is assuming (vanilla) Clang is linux-only.
     - osx-cmake.patch
+    # See https://github.com/conda-forge/nvcc-feedstock/issues/76 for context
+    - nvcc-windows.patch  # [win]
 
 build:
   number: 1
