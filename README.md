@@ -69,38 +69,38 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_cuda_compiler_version10.2cudnn7</td>
+              <td>win_64_cuda_compiler_version10.2</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17675&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/katago-feedstock?branchName=main&jobName=win&configuration=win_64_cuda_compiler_version10.2cudnn7" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/katago-feedstock?branchName=main&jobName=win&configuration=win_64_cuda_compiler_version10.2" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_cuda_compiler_version11.0cudnn8</td>
+              <td>win_64_cuda_compiler_version11.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17675&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/katago-feedstock?branchName=main&jobName=win&configuration=win_64_cuda_compiler_version11.0cudnn8" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/katago-feedstock?branchName=main&jobName=win&configuration=win_64_cuda_compiler_version11.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_cuda_compiler_version11.1cudnn8</td>
+              <td>win_64_cuda_compiler_version11.1</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17675&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/katago-feedstock?branchName=main&jobName=win&configuration=win_64_cuda_compiler_version11.1cudnn8" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/katago-feedstock?branchName=main&jobName=win&configuration=win_64_cuda_compiler_version11.1" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_cuda_compiler_version11.2cudnn8</td>
+              <td>win_64_cuda_compiler_version11.2</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17675&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/katago-feedstock?branchName=main&jobName=win&configuration=win_64_cuda_compiler_version11.2cudnn8" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/katago-feedstock?branchName=main&jobName=win&configuration=win_64_cuda_compiler_version11.2" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_cuda_compiler_versionNonecudnnundefined</td>
+              <td>win_64_cuda_compiler_versionNone</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17675&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/katago-feedstock?branchName=main&jobName=win&configuration=win_64_cuda_compiler_versionNonecudnnundefined" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/katago-feedstock?branchName=main&jobName=win&configuration=win_64_cuda_compiler_versionNone" alt="variant">
                 </a>
               </td>
             </tr>

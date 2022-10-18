@@ -7,17 +7,15 @@ channel_targets:
 cuda_compiler:
 - nvcc
 cuda_compiler_version:
-- None
+- '10.2'
 cudnn:
-- undefined
+- '7'
 curl:
 - '7'
 cxx_compiler:
 - vs2019
 libzip:
 - '1'
-nccl:
-- '2'
 openssl:
 - 1.1.1
 target_platform:
