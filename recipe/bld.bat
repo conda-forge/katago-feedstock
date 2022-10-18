@@ -2,19 +2,32 @@
 
 if "%cuda_compiler_version%" == "None" (
     set KATAGO_BACKEND="EIGEN"
+    set build_with_cuda=
+    set USE_CUDA=0
 ) else (
     set KATAGO_BACKEND="CUDA"
-
+    set build_with_cuda=1
     set desired_cuda=%CUDA_VERSION:~0,-1%.%CUDA_VERSION:~-1,1%
-    set "CUDA_HOME=%CUDA_HOME:\=/%"
-    set CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%desired_cuda%
-    set CUDA_BIN_PATH=%CUDA_PATH%\bin
-    set "PATH=%CUDA_BIN_PATH%;%PATH%"
-    set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
-    for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")
-    set "NVCC=%NVCC% --use-local-env"
-    echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"
 )
+
+if "%build_with_cuda%" == "" goto cuda_flags_end
+
+set CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%desired_cuda%
+set CUDA_BIN_PATH=%CUDA_PATH%\bin
+
+:cuda_flags_end
+
+set DISTUTILS_USE_SDK=1
+set CMAKE_INCLUDE_PATH=%LIBRARY_PREFIX%\include
+set LIB=%LIBRARY_PREFIX%\lib;%LIB%
+
+IF "%build_with_cuda%" == "" goto cuda_end
+
+set "PATH=%CUDA_BIN_PATH%;%PATH%"
+set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
+echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"
+
+:cuda_end
 
 :: Make a build folder and change to it.
 cd cpp/
