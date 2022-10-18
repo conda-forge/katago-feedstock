@@ -28,7 +28,7 @@ requirements:
     - curl
   host:
     - cudnn  # [cuda_compiler_version != "None"]
-    - nccl  # [cuda_compiler_version != "None"]
+    - nccl  # [cuda_compiler_version != "None" and not win]
     - zlib
     - libzip
     - openssl
