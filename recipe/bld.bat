@@ -7,6 +7,7 @@ if "%cuda_compiler_version%" == "None" (
 ) else (
     set KATAGO_BACKEND="CUDA"
     set build_with_cuda=1
+    set USE_CUDA=1
     set desired_cuda=%CUDA_VERSION:~0,-1%.%CUDA_VERSION:~-1,1%
 )
 
