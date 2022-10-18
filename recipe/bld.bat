@@ -12,6 +12,7 @@ if "%cuda_compiler_version%" == "None" (
     set CUDA_BIN_PATH=%CUDA_PATH%\bin
     set "PATH=%CUDA_BIN_PATH%;%PATH%"
     set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
+    set "NVCC=%NVCC% --use-local-env"
 )
 
 :: Make a build folder and change to it.
