@@ -8,12 +8,11 @@ if "%cuda_compiler_version%" == "None" (
     set KATAGO_BACKEND="CUDA"
     set build_with_cuda=1
     set USE_CUDA=1
-    set desired_cuda=%cuda_compiler_version:~0,-1%.%cuda_compiler_version:~-1,1%
 )
 
 if "%build_with_cuda%" == "" goto cuda_flags_end
 
-set CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%desired_cuda%
+set CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%
 set CUDA_BIN_PATH=%CUDA_PATH%\bin
 
 :cuda_flags_end
