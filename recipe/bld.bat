@@ -12,7 +12,9 @@ if "%cuda_compiler_version%" == "None" (
     set CUDA_BIN_PATH=%CUDA_PATH%\bin
     set "PATH=%CUDA_BIN_PATH%;%PATH%"
     set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
+    for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")
     set "NVCC=%NVCC% --use-local-env"
+    echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"
 )
 
 :: Make a build folder and change to it.
