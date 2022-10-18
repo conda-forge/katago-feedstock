@@ -1,33 +1,15 @@
 @echo On
 
 if "%cuda_compiler_version%" == "None" (
-    set build_with_cuda=
-    set USE_CUDA=0
     set KATAGO_BACKEND="EIGEN"
 ) else (
-    set build_with_cuda=1
-    set desired_cuda=%CUDA_VERSION:~0,-1%.%CUDA_VERSION:~-1,1%
     set KATAGO_BACKEND="CUDA"
+
+    REM this should move to nvcc-feedstock
+    set "CUDA_PATH=%CUDA_PATH:\=/%"
+    set "CUDA_HOME=%CUDA_HOME:\=/%"
+    set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
 )
-
-if "%build_with_cuda%" == "" goto cuda_flags_end
-
-set CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%desired_cuda%
-set CUDA_BIN_PATH=%CUDA_PATH%\bin
-
-:cuda_flags_end
-
-set DISTUTILS_USE_SDK=1
-
-set CMAKE_INCLUDE_PATH=%LIBRARY_PREFIX%\include
-set LIB=%LIBRARY_PREFIX%\lib;%LIB%
-
-IF "%build_with_cuda%" == "" goto cuda_end
-
-set "PATH=%CUDA_BIN_PATH%;%PATH%"
-set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
-
-:cuda_end
 
 :: Make a build folder and change to it.
 cd cpp/

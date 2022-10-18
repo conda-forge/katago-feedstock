@@ -15,7 +15,6 @@ source:
 
 build:
   number: 1
-  # skip: true  # [cuda_compiler_version != "None" and win]
   string: cuda{{ cuda_compiler_version | replace('.', '') }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
   string: cpu_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
 
