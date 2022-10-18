@@ -28,6 +28,7 @@ set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
 
 for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")
 set "NVCC=%NVCC% --use-local-env"
+set CMAKE_CUDA_FLAGS="%CMAKE_CUDA_FLAGS% --use-local-env "
 echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"
 
 :cuda_end
@@ -43,6 +44,7 @@ cmake -G "NMake Makefiles" ^
       -DUSE_BACKEND="%KATAGO_BACKEND%" ^
       -DUSE_AVX2=1 ^
       -DNO_GIT_REVISION=1 ^
+      -DCMAKE_CUDA_FLAGS="%CMAKE_CUDA_FLAGS%" ^
       .
 if errorlevel 1 exit 1
 
