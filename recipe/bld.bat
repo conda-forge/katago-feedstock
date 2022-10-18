@@ -4,9 +4,8 @@ if "%cuda_compiler_version%" == "None" (
     set KATAGO_BACKEND="EIGEN"
 ) else (
     set KATAGO_BACKEND="CUDA"
-    set desired_cuda=%CUDA_VERSION:~0,-1%.%CUDA_VERSION:~-1,1%
 
-    REM this should move to nvcc-feedstock
+    set desired_cuda=%CUDA_VERSION:~0,-1%.%CUDA_VERSION:~-1,1%
     set "CUDA_HOME=%CUDA_HOME:\=/%"
     set CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%desired_cuda%
     set CUDA_BIN_PATH=%CUDA_PATH%\bin
