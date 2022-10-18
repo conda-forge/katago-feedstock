@@ -4,12 +4,8 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-cuda_compiler:
-- nvcc
 cuda_compiler_version:
 - None
-cudnn:
-- undefined
 curl:
 - '7'
 cxx_compiler:
@@ -20,8 +16,5 @@ openssl:
 - 1.1.1
 target_platform:
 - win-64
-zip_keys:
-- - cudnn
-  - cuda_compiler_version
 zlib:
 - '1.2'
