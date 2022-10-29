@@ -35,7 +35,7 @@ cmake -G "NMake Makefiles" ^
 if errorlevel 1 exit 1
 
 :: Build!
-nmake
+cmake --build .
 if errorlevel 1 exit 1
 
 :: Install binary
