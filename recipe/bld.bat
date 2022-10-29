@@ -23,18 +23,19 @@ if "%cuda_compiler_version%" == "None" (
 cd cpp/
 
 :: Configure using the CMakeFiles
-cmake -G "Ninja" ^
+cmake -G "NMake Makefiles" ^
       -DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_BUILD_TYPE:STRING=Release ^
       -DUSE_BACKEND="%KATAGO_BACKEND%" ^
       -DUSE_AVX2=1 ^
       -DNO_GIT_REVISION=1 ^
+      %CMAKE_ARGS% ^
       .
 if errorlevel 1 exit 1
 
 :: Build!
-cmake --build .
+cmake --build . --config Release
 if errorlevel 1 exit 1
 
 :: Install binary
