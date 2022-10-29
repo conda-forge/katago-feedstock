@@ -17,14 +17,13 @@ if "%cuda_compiler_version%" == "None" (
 
     set CC="cl.exe "
     set CXX="cl.exe "
-    set CMAKE_GENERATOR="Ninja"
 )
 
 :: Make a build folder and change to it.
 cd cpp/
 
 :: Configure using the CMakeFiles
-cmake -G "NMake Makefiles" ^
+cmake -G "Ninja" ^
       -DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_BUILD_TYPE:STRING=Release ^
