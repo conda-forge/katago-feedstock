@@ -25,7 +25,7 @@ cmake -G "Ninja" ^
       -DUSE_BACKEND="%KATAGO_BACKEND%" ^
       -DUSE_AVX2=1 ^
       -DNO_GIT_REVISION=1 ^
-      -DCUDA_NVCC_FLAGS="--use-local-env" ^
+      -DCMAKE_CUDA_FLAGS="--use-local-env" ^
       %CMAKE_ARGS% ^
       .
 if errorlevel 1 exit 1
@@ -53,5 +53,3 @@ if errorlevel 1 exit 1
 if not exist "%KATAGO_WEIGTHS_DIR%" mkdir %KATAGO_WEIGTHS_DIR%
 copy %KATAGO_WEIGTHS_NAME% %KATAGO_WEIGTHS_DIR%\%KATAGO_WEIGTHS_NAME%
 if errorlevel 1 exit 1
-
-
