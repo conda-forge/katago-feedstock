@@ -14,11 +14,6 @@ set DISTUTILS_USE_SDK=1
 set CMAKE_INCLUDE_PATH=%LIBRARY_PREFIX%\include
 set LIB=%LIBRARY_PREFIX%\lib;%LIB%
 
-set CMAKE_GENERATOR="Ninja"
-set CMAKE_GENERATOR_PLATFORM=
-set CMAKE_GENERATOR_TOOLSET=
-set VERBOSE=ON
-
 :: Make a build folder and change to it.
 cd cpp/
 
