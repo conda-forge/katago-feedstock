@@ -6,7 +6,7 @@ if "%cuda_compiler_version%" == "None" (
     set KATAGO_BACKEND="CUDA"
     set CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%
     set CUDA_BIN_PATH=%CUDA_PATH%\bin
-    set "PATH=%CUDA_BIN_PATH%;%PATH%"
+    set PATH="%CUDA_BIN_PATH%;%PATH%"
     set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
 )
 
@@ -23,18 +23,20 @@ set VERBOSE=ON
 cd cpp/
 
 :: Configure using the CMakeFiles
-cmake -G "NMake Makefiles" ^
+cmake -G "Ninja" ^
       -DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_BUILD_TYPE:STRING=Release ^
       -DUSE_BACKEND="%KATAGO_BACKEND%" ^
       -DUSE_AVX2=1 ^
       -DNO_GIT_REVISION=1 ^
+      -DCUDA_NVCC_FLAGS="--use-local-env" ^
+      %CMAKE_ARGS% ^
       .
 if errorlevel 1 exit 1
 
 :: Build!
-nmake
+cmake --build . --config Release -j%CPU_COUNT% --verbose
 if errorlevel 1 exit 1
 
 :: Install binary
