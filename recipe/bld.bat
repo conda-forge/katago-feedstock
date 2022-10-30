@@ -5,9 +5,11 @@ if "%cuda_compiler_version%" == "None" (
 ) else (
     set KATAGO_BACKEND="CUDA"
     set CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%
-    set CUDA_BIN_PATH=%CUDA_PATH%\bin
-    set PATH="%CUDA_BIN_PATH%;%PATH%"
     set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
+
+    for /f "tokens=* usebackq" %%f in (`where cl.exe`) do set "CONDA_NVCC_CCBIN=%%f"
+    set NVCC="%CUDA_HOME%\bin\nvcc.exe" --use-local-env -ccbin "%CONDA_NVCC_CCBIN%"
+    echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH% and CONDA_NVCC_CCBIN is %CONDA_NVCC_CCBIN%"
 )
 
 set DISTUTILS_USE_SDK=1
@@ -25,7 +27,6 @@ cmake -G "Ninja" ^
       -DUSE_BACKEND="%KATAGO_BACKEND%" ^
       -DUSE_AVX2=1 ^
       -DNO_GIT_REVISION=1 ^
-      -DCMAKE_CUDA_FLAGS="--use-local-env" ^
       %CMAKE_ARGS% ^
       .
 if errorlevel 1 exit 1
