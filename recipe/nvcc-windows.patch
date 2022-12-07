@@ -1,0 +1,17 @@
+diff --git a/cpp/CMakeLists.txt b/cpp/CMakeLists.txt
+index 6f2a9b4c..a115608b 100644
+--- a/cpp/CMakeLists.txt
++++ b/cpp/CMakeLists.txt
+@@ -48,10 +48,10 @@ if(USE_BACKEND STREQUAL "CUDA")
+
+   if(CMAKE_CUDA_COMPILER_VERSION VERSION_GREATER_EQUAL 11.0)
+     set(CMAKE_CUDA_ARCHITECTURES 35 37 50 53 60 61 62 70 72 75 80)
+-    set(CMAKE_CUDA_FLAGS "-Wno-deprecated-gpu-targets")
++    set(CMAKE_CUDA_FLAGS "-Wno-deprecated-gpu-targets --use-local-env")
+   elseif (CMAKE_CUDA_COMPILER_VERSION VERSION_GREATER_EQUAL 10.2)
+     set(CMAKE_CUDA_ARCHITECTURES 30 35 37 50 53 60 61 62 70 72 75)
+-    set(CMAKE_CUDA_FLAGS "-Wno-deprecated-gpu-targets")
++    set(CMAKE_CUDA_FLAGS "-Wno-deprecated-gpu-targets --use-local-env")
+   else()
+     message(WARNING "CUDA 10.2 or greater is recommended, but attempting to build anyways")
+     set(CMAKE_CUDA_ARCHITECTURES 30 37 53 70)

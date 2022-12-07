@@ -16,8 +16,6 @@ cxx_compiler:
 - vs2019
 libzip:
 - '1'
-nccl:
-- '2'
 openssl:
 - 1.1.1
 target_platform:
