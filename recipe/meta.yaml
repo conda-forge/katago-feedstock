@@ -17,6 +17,8 @@ build:
   number: 0
   string: cuda{{ cuda_compiler_version | replace('.', '') }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
   string: cpu_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
+  # windows+CUDA needs to be fixed more comprehensively, see PR #1; skip for now
+  skip: true  # [win and cuda_compiler_version != "None"]
 
 requirements:
   build:
@@ -28,7 +30,7 @@ requirements:
     - curl
   host:
     - cudnn  # [cuda_compiler_version != "None"]
-    - nccl  # [cuda_compiler_version != "None"]
+    - nccl   # [linux and cuda_compiler_version != "None"]
     - zlib
     - libzip
     - openssl
