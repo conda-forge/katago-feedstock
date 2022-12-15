@@ -30,7 +30,8 @@ set CUDNN_INCLUDE_DIR=%LIBRARY_PREFIX%\include
 :cuda_end
 
 :: Make a build folder and change to it.
-cd cpp/
+mkdir build
+cd build
 
 :: Configure using the CMakeFiles
 cmake -G "NMake Makefiles" ^
@@ -40,7 +41,7 @@ cmake -G "NMake Makefiles" ^
       -DBUILD_DISTRIBUTED=1 ^
       -DUSE_BACKEND="%KATAGO_BACKEND%" ^
       -DUSE_AVX2=1 ^
-      .
+      ..\cpp
 if errorlevel 1 exit 1
 
 :: Build!
@@ -54,7 +55,7 @@ if errorlevel 1 exit 1
 
 :: Install config files
 if not exist "%LIBRARY_PREFIX%\var\" mkdir "%LIBRARY_PREFIX%\var\"
-xcopy /y /s /i configs %LIBRARY_PREFIX%\var\configs
+xcopy /y /s /i ..\cpp\configs %LIBRARY_PREFIX%\var\configs
 if errorlevel 1 exit 1
 
 :: Download latest NN

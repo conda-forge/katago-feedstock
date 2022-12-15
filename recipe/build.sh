@@ -1,7 +1,8 @@
 #!/bin/bash
 set -ex
 
-cd cpp/
+mkdir build
+cd build
 
 if [[ ${cuda_compiler_version} != "None" ]]; then
   export KATAGO_BACKEND="CUDA"
@@ -25,14 +26,15 @@ else
   export USE_AVX2=1
 fi
 
-cmake ${CMAKE_ARGS} . \
+cmake ${CMAKE_ARGS} \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX=$PREFIX \
   -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=TRUE \
   -DCMAKE_INSTALL_LIBDIR=lib \
   -DBUILD_DISTRIBUTED=1 \
   -DUSE_BACKEND=${KATAGO_BACKEND} \
-  -DUSE_AVX2=${USE_AVX2}
+  -DUSE_AVX2=${USE_AVX2} \
+  ../cpp
 
 make -j $CPU_COUNT
 
@@ -44,7 +46,7 @@ chmod +x "${PREFIX}/bin/katago"
 # Install config files
 KATAGO_VAR_DIR="${PREFIX}/var/katago/"
 mkdir -p $KATAGO_VAR_DIR
-cp -R ./configs/ $KATAGO_VAR_DIR
+cp -R ../cpp/configs/ $KATAGO_VAR_DIR
 
 # Install NN files
 KATAGO_WEIGTHS_DIR="${KATAGO_VAR_DIR}/weights/"
