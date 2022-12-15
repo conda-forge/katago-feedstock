@@ -11,11 +11,10 @@ source:
   # https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed
   git_url: https://github.com/lightvector/KataGo.git
   git_rev: v{{ version }}
-
   patches:
     # NOTE(hadim): conda-forge uses it's own build of Clang (rather than using the system's AppleClang)
     # But the package is assuming (vanilla) Clang is linux-only.
-    - osx-cmake.patch
+    - patches/osx-cmake.patch  # [osx]
 
 build:
   number: 0
