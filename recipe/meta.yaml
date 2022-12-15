@@ -33,8 +33,10 @@ requirements:
     - nccl   # [linux and cuda_compiler_version != "None"]
     - zlib
     - libzip
-    - openssl
     - eigen
+    # necessary for BUILD_DISTRIBUTED
+    - openssl
+    - git
   run:
     - {{ pin_compatible('cudnn') }}  # [cuda_compiler_version != "None"]
 

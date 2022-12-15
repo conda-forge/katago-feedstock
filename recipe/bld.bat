@@ -40,7 +40,6 @@ cmake -G "NMake Makefiles" ^
       -DBUILD_DISTRIBUTED=1 ^
       -DUSE_BACKEND="%KATAGO_BACKEND%" ^
       -DUSE_AVX2=1 ^
-      -DNO_GIT_REVISION=1 ^
       .
 if errorlevel 1 exit 1
 
