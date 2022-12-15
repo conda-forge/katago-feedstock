@@ -26,7 +26,8 @@ else
   export USE_AVX2=1
 fi
 
-cmake ${CMAKE_ARGS} \
+cmake -G Ninja \
+  ${CMAKE_ARGS} \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX=$PREFIX \
   -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=TRUE \
@@ -36,7 +37,7 @@ cmake ${CMAKE_ARGS} \
   -DUSE_AVX2=${USE_AVX2} \
   ../cpp
 
-make -j $CPU_COUNT
+cmake --build .
 
 # Install binary
 mkdir -p "${PREFIX}/bin/"

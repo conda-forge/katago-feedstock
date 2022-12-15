@@ -30,7 +30,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
     - cmake
-    - make  # [unix]
+    - ninja
     - curl
   host:
     - cudnn  # [cuda_compiler_version != "None"]

@@ -34,7 +34,7 @@ mkdir build
 cd build
 
 :: Configure using the CMakeFiles
-cmake -G "NMake Makefiles" ^
+cmake -G Ninja ^
       -DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_BUILD_TYPE:STRING=Release ^
@@ -45,7 +45,7 @@ cmake -G "NMake Makefiles" ^
 if errorlevel 1 exit 1
 
 :: Build!
-nmake
+cmake --build .
 if errorlevel 1 exit 1
 
 :: Install binary
