@@ -22,6 +22,16 @@ fi
 # Enable AVX2 on Linux and disable on OSX
 if [[ "$target_platform" == "osx-64" ]]; then
   export USE_AVX2=0
+
+  # The build script expects Clang to need to link with `-latomic`, because it's
+  # (correctly) not detecting our compiler as AppleClang and it apparently
+  # expects a GNU runtime rather than compiler-rt. Because of our use of the
+  # distributed training feature, which requires a build against an unpatched
+  # source tree, we can't fix up the build script. So instead let's fake a
+  # libatomic.
+  cpu="$(echo $HOST |sed -e s/-.*//)"
+  ln -s $BUILD_PREFIX/lib/clang/*/lib/libclang_rt.builtins_${cpu}_osx.a $PREFIX/lib/libatomic.a
+  test -f $PREFIX/lib/libatomic.a
 else
   export USE_AVX2=1
 fi
