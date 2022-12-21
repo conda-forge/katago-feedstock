@@ -40,11 +40,21 @@ requirements:
     - {{ pin_compatible('cudnn') }}  # [cuda_compiler_version != "None"]
 
 test:
+  source_files:
+    - cpp/tests/data
   commands:
     - katago
     - katago version
-    - katago runtests  # [not osx]
-    - katago runnnlayertests  # [cuda_compiler_version == "None"]
+    # fails some accuracy tests on osx
+    - katago runtests                      # [not osx]
+    - katago runnnlayertests               # [cuda_compiler_version == "None"]
+    # run some tests that hopefully exercise the distributed code a bit as well
+    # (based on searching "distributed" under cpp/tests and running the right portion)
+    - cd cpp
+    - mkdir tests/scratch                  # [unix]
+    - mkdir tests\scratch                  # [win]
+    - katago runoutputtests
+    - katago runtinynntests tests/scratch  # [cuda_compiler_version == "None"]
 
 about:
   home: https://github.com/lightvector/KataGo
