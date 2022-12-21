@@ -13,7 +13,7 @@ source:
   git_rev: v{{ version }}
 
 build:
-  number: 1
+  number: 2
   string: cuda{{ cuda_compiler_version | replace('.', '') }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
   string: cpu_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
   # windows+CUDA needs to be fixed more comprehensively, see PR #1; skip for now
