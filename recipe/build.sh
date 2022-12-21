@@ -65,3 +65,8 @@ KATAGO_WEIGTHS_NAME="kata1-b40c256-s11840935168-d2898845681.bin.gz"
 curl https://media.katagotraining.org/uploaded/networks/models/kata1/${KATAGO_WEIGTHS_NAME} --output ${KATAGO_WEIGTHS_NAME}
 mkdir -p $KATAGO_WEIGTHS_DIR
 cp $KATAGO_WEIGTHS_NAME "${KATAGO_WEIGTHS_DIR}/${KATAGO_WEIGTHS_NAME}"
+
+if [[ "$target_platform" == "osx-64" ]]; then
+  # delete symlink again so that conda does not trip over it
+  rm $PREFIX/lib/libatomic.a
+fi
