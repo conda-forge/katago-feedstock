@@ -36,6 +36,7 @@ requirements:
     # necessary for BUILD_DISTRIBUTED
     - openssl
     - git
+    - libcublas-dev      # [(cuda_compiler_version or "").startswith("12")]
   run:
     - {{ pin_compatible('cudnn') }}  # [cuda_compiler_version != "None"]
 
