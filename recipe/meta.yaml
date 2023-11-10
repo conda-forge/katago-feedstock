@@ -53,7 +53,7 @@ test:
     - cd cpp
     - mkdir tests/scratch                  # [unix]
     - mkdir tests\scratch                  # [win]
-    - katago runoutputtests
+    - katago runoutputtests                # [unix]
     - katago runtinynntests tests/scratch 1.0  # [cuda_compiler_version == "None"]
 
 about:
