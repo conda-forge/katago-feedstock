@@ -41,7 +41,7 @@ requirements:
 
 test:
   source_files:
-    - cpp/tests/data
+    - cpp/tests/
   commands:
     - katago
     - katago version
