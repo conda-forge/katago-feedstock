@@ -54,7 +54,7 @@ test:
     - mkdir tests/scratch                  # [unix]
     - mkdir tests\scratch                  # [win]
     - katago runoutputtests
-    - katago runtinynntests tests/scratch  # [cuda_compiler_version == "None"]
+    - katago runtinynntests tests/scratch 1.0  # [cuda_compiler_version == "None"]
 
 about:
   home: https://github.com/lightvector/KataGo
