@@ -19,7 +19,7 @@ else
   export USE_CUDA=0
 fi
 
-# Enable AVX2 on Linux and disable on OSX
+# Fix -latomic on OSX
 if [[ "$target_platform" == osx-* ]]; then
 
   # The build script expects Clang to need to link with `-latomic`, because it's
