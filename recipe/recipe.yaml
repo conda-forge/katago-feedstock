@@ -3,9 +3,8 @@ schema_version: 1
 context:
   name: katago
   version: 1.13.2
-  cuda_version: ${{ env.get("CONDA_OVERRIDE_CUDA", default="None")}}
-  cuda: ${{ "true" if cuda_version != "None" else "false" }}
-  cuda_build_string: cuda_${{ cuda_version | version_to_buildstring }}
+  cuda: ${{ "true" if cuda_compiler_version != "None" else "false" }}
+  cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
   string_prefix: ${{ cuda_build_string if cuda ==  "true" else "cpu_" }}
 
 package:
@@ -32,17 +31,13 @@ build:
       - ${{ "cuda" if cuda == "true" }}
     # this will down-prioritize the cuda variant versus other variants of the package
     down_prioritize_variant: ${{ 1 if cuda == "true" else 0 }}
-  script:
-    file: build
-    env:
-      cuda_compiler_version: ${{ cuda_version | default('None') }}
 
 requirements:
   build:
     - if: cuda == "true"
       then:
         - ${{ compiler('cuda') }}
-        - cuda-version ==${{ cuda_version }}
+        - cuda-version ==${{ cuda_compiler_version }}
         - libcublas-dev
 
     - ${{ compiler('c') }}
@@ -54,7 +49,7 @@ requirements:
   host:
     - if: cuda == "true"
       then:
-        - cuda-version ==${{ cuda_version }}
+        - cuda-version ==${{ cuda_compiler_version }}
         - libcublas-dev
         - cudnn
         - nccl
