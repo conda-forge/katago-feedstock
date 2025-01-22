@@ -47,7 +47,6 @@ requirements:
     - ninja
     - curl
     - git
-    - openssl
   host:
     - if: cuda == "true"
       then:
