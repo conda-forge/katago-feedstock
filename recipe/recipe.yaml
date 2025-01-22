@@ -5,7 +5,7 @@ context:
   version: 1.13.2
   cuda: ${{ "true" if cuda_compiler_version != "None" else "false" }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
-  string_prefix: ${{ cuda_build_string if cuda ==  "true" else "cpu_" }}
+  string_prefix: ${{ cuda_build_string if cuda == "true" else "cpu_" }}
 
 package:
   name: ${{ name|lower }}
