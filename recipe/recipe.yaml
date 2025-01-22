@@ -21,7 +21,7 @@ source:
   rev: v${{ version }}
 
 build:
-  number: 0
+  number: 1
   skip:
     - win and cuda == "true"
     - match(cuda_version, ">=12")
