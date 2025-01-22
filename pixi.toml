@@ -30,12 +30,8 @@ build = "rattler-build build --recipe recipe"
 "inspect-osx_arm64_" = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_.yaml"
 "build-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13" = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13.yaml"
 "inspect-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13" = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13.yaml"
-"build-linux_ppc64le_c_compiler_version12cuda_compilercuda-nvcccuda_compiler_version12.4cxx_compiler_version12" = "rattler-build build --recipe recipe -m .ci_support/linux_ppc64le_c_compiler_version12cuda_compilercuda-nvcccuda_compiler_version12.4cxx_compiler_version12.yaml"
-"inspect-linux_ppc64le_c_compiler_version12cuda_compilercuda-nvcccuda_compiler_version12.4cxx_compiler_version12" = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_ppc64le_c_compiler_version12cuda_compilercuda-nvcccuda_compiler_version12.4cxx_compiler_version12.yaml"
 "build-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13" = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13.yaml"
 "inspect-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13" = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13.yaml"
-"build-linux_ppc64le_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13" = "rattler-build build --recipe recipe -m .ci_support/linux_ppc64le_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13.yaml"
-"inspect-linux_ppc64le_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13" = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_ppc64le_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13.yaml"
 
 [feature.smithy.dependencies]
 conda-smithy = "*"
