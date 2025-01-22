@@ -46,6 +46,7 @@ requirements:
     - cmake
     - ninja
     - curl
+    - git
   host:
     - if: cuda == "true"
       then:
@@ -60,7 +61,6 @@ requirements:
     - eigen
     # necessary for BUILD_DISTRIBUTED
     - openssl
-    - git
   run:
     - if: cuda == "true"
       then: ${{ pin_compatible('cudnn') }}
