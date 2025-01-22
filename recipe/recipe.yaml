@@ -1,0 +1,104 @@
+schema_version: 1
+
+context:
+  name: katago
+  version: 1.13.2
+  cuda_version: ${{ env.get("CONDA_OVERRIDE_CUDA", default="None")}}
+  cuda: ${{ "true" if cuda_version != "None" else "false" }}
+  cuda_build_string: cuda_${{ cuda_version | version_to_buildstring }}
+  string_prefix: ${{ cuda_build_string if cuda ==  "true" else "cpu_" }}
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  # use git_url, because katago needs a git repo to compile BUILD_DISTRIBUTED support;
+  # this cannot (or rather: should not) be patch out, or even patched at all (-> dirty tag),
+  # compare the exceedingly clear instructions/pleas here:
+  # https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed
+  git: https://github.com/lightvector/KataGo.git
+  rev: v${{ version }}
+
+build:
+  number: 0
+  skip:
+    - win and cuda == "true"
+    - match(cuda_version, ">=12")
+  string: ${{ string_prefix }}py${{ python | version_to_buildstring }}h${{ hash }}_${{ build_number }}
+  variant:
+    use_keys:
+      # use cuda from the variant config, e.g. to build multiple CUDA variants
+      - ${{ "cuda" if cuda == "true" }}
+    # this will down-prioritize the cuda variant versus other variants of the package
+    down_prioritize_variant: ${{ 1 if cuda == "true" else 0 }}
+  script:
+    file: build
+    env:
+      cuda_compiler_version: ${{ cuda_version | default('None') }}
+
+requirements:
+  build:
+    - if: cuda == "true"
+      then:
+        - ${{ compiler('cuda') }}
+        - cuda-version ==${{ cuda_version }}
+        - libcublas-dev
+
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - ninja
+    - curl
+  host:
+    - if: cuda == "true"
+      then:
+        - cuda-version ==${{ cuda_version }}
+        - libcublas-dev
+        - cudnn
+        - nccl
+
+    # libraries
+    - zlib
+    - libzip
+    - eigen
+    # necessary for BUILD_DISTRIBUTED
+    - openssl
+    - git
+  run:
+    - if: cuda == "true"
+      then: ${{ pin_compatible('cudnn') }}
+
+tests:
+  - files:
+      source:
+        - cpp/tests/
+    script:
+      - katago
+      - katago version
+
+      - ${{ "katago runtests" if not osx }}
+      - ${{ "katago runnnlayertests" if cuda != "true" }}
+
+      - if: unix
+        then:
+          - cd cpp/
+          - mkdir tests/scratch
+          - katago runoutputtests
+          - ${{ "katago runtinynntests tests/scratch 1.0" if cuda != "true" }}
+
+      - if: win
+        then:
+          - cd cpp/
+          - mkdir tests\scratch
+          - - ${{ "katago runtinynntests tests/scratch 1.0" if cuda != "true" }}
+
+about:
+  summary: GTP engine and self-play learning in Go
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/lightvector/KataGo
+
+extra:
+  recipe-maintainers:
+    - hadim

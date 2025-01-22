@@ -61,7 +61,7 @@ cp -R ../cpp/configs/ $KATAGO_VAR_DIR
 
 # Install NN files
 KATAGO_WEIGTHS_DIR="${KATAGO_VAR_DIR}/weights/"
-KATAGO_WEIGTHS_NAME="kata1-b40c256-s11840935168-d2898845681.bin.gz"
+KATAGO_WEIGTHS_NAME="kata1-b28c512nbt-s8209287936-d4596492266.bin.gz"
 curl https://media.katagotraining.org/uploaded/networks/models/kata1/${KATAGO_WEIGTHS_NAME} --output ${KATAGO_WEIGTHS_NAME}
 mkdir -p $KATAGO_WEIGTHS_DIR
 cp $KATAGO_WEIGTHS_NAME "${KATAGO_WEIGTHS_DIR}/${KATAGO_WEIGTHS_NAME}"
