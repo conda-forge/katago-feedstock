@@ -17,8 +17,7 @@ source:
   # compare the exceedingly clear instructions/pleas here:
   # https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed
   git: https://github.com/lightvector/KataGo.git
-  # tag: v${{ version }}
-  rev: cd0ed6c0712088ddb901be68189ba7fa1439a9e7
+  tag: v${{ version }}
 
 build:
   number: 1
@@ -47,7 +46,6 @@ requirements:
     - cmake
     - ninja
     - curl
-    - git
   host:
     - if: cuda == "true"
       then:
@@ -62,6 +60,7 @@ requirements:
     - eigen
     # necessary for BUILD_DISTRIBUTED
     - openssl
+    - git
   run:
     - if: cuda == "true"
       then: ${{ pin_compatible('cudnn') }}
