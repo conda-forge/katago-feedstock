@@ -24,7 +24,7 @@ build:
   number: 1
   skip:
     - win and cuda == "true"
-    - match(cuda_version, "<12")
+    - cuda == "true" and match(cuda_version, "<12")
   string: ${{ string_prefix }}py${{ python | version_to_buildstring }}h${{ hash }}_${{ build_number }}
   variant:
     use_keys:
