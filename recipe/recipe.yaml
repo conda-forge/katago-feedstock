@@ -23,8 +23,8 @@ source:
 build:
   number: 1
   skip:
-    - win and cuda == "true"
-    - cuda == "true" and match(cuda_version, "<12")
+    - cuda == "true" and win
+    - cuda == "true" and match(cuda_compiler_version, "<12")
   string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
   variant:
     use_keys:
