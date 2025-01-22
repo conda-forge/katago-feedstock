@@ -34,11 +34,9 @@ build:
 
 requirements:
   build:
-    - if: cuda == "true"
+    - if: build_platform != target_platform
       then:
-        - ${{ compiler('cuda') }}
-        - cuda-version ==${{ cuda_compiler_version }}
-        - libcublas-dev
+        - git
 
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
