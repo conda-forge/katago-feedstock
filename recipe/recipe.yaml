@@ -12,13 +12,17 @@ package:
   version: ${{ version }}
 
 source:
-  # use git_url, because katago needs a git repo to compile BUILD_DISTRIBUTED support;
-  # this cannot (or rather: should not) be patch out, or even patched at all (-> dirty tag),
-  # compare the exceedingly clear instructions/pleas here:
-  # https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed
-  git: https://github.com/lightvector/KataGo.git
-  depth: 0
-  # tag: v${{ version }}
+  # # use git_url, because katago needs a git repo to compile BUILD_DISTRIBUTED support;
+  # # this cannot (or rather: should not) be patch out, or even patched at all (-> dirty tag),
+  # # compare the exceedingly clear instructions/pleas here:
+  # # https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed
+  # git: https://github.com/lightvector/KataGo.git
+  # depth: 0
+  # # tag: v${{ version }}
+
+  # from https://github.com/prefix-dev/rattler-build/blob/069c85725058ae5957824f49036b56bccebeb893/test-data/recipes/git_source/recipe.yaml
+  git: https://github.com/prefix-dev/rattler-build
+  tag: v0.1.0
 
 build:
   number: 1
