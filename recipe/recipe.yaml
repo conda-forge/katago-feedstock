@@ -17,6 +17,7 @@ source:
   # compare the exceedingly clear instructions/pleas here:
   # https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed
   git: https://github.com/lightvector/KataGo.git
+  depth: 0
   # tag: v${{ version }}
 
 build:
