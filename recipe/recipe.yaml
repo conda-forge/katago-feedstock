@@ -44,7 +44,7 @@ requirements:
     - cmake
     - ninja
     - curl
-    - ${{ "git" if unix }}
+    - git
   host:
     - if: cuda == "true"
       then:
