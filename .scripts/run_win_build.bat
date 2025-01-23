@@ -82,6 +82,9 @@ if NOT [%flow_run_id%] == [] (
 
 call :end_group
 
+:: Disable SSL verification for git
+set "GIT_SSL_NO_VERIFY=true"
+
 :: Build the recipe
 echo Building recipe
 rattler-build.exe build --recipe "recipe" -m .ci_support\%CONFIG%.yaml %EXTRA_CB_OPTIONS% --target-platform %HOST_PLATFORM%
