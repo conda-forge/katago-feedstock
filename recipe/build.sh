@@ -1,6 +1,8 @@
 #!/bin/bash
 set -ex
 
+git checkout "v${PKG_VERSION}"
+
 mkdir build
 cd build
 

@@ -1,5 +1,7 @@
 @echo On
 
+git checkout "v${PKG_VERSION}"
+
 if "%cuda_compiler_version%" == "None" (
     set build_with_cuda=
     set USE_CUDA=0
