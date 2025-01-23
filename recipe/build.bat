@@ -7,7 +7,6 @@ if errorlevel 1 exit 1
 
 if "%cuda_compiler_version%" == "None" (
     set build_with_cuda=
-    set USE_CUDA=0
     set KATAGO_BACKEND="EIGEN"
 ) else (
     set build_with_cuda=1

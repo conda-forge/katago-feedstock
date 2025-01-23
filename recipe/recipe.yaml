@@ -92,7 +92,7 @@ tests:
 about:
   summary: GTP engine and self-play learning in Go
   license: MIT
-  license_file: LICENSE
+  license_file: katago/LICENSE # NOTE: remove subfolder once we dont git clone during build
   homepage: https://github.com/lightvector/KataGo
 
 extra:
