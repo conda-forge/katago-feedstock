@@ -1,7 +1,8 @@
 #!/bin/bash
 set -ex
 
-git clone --single-branc --branch "v${PKG_VERSION}" https://github.com/lightvector/KataGo.git .
+git clone --single-branc --branch "v${PKG_VERSION}" https://github.com/lightvector/KataGo.git katago/
+cd katago/
 
 mkdir build
 cd build

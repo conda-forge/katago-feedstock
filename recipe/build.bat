@@ -1,7 +1,8 @@
 @echo On
 
 :: Clone the specific branch of the repository
-git clone --single-branch --branch "v%PKG_VERSION%" https://github.com/lightvector/KataGo.git .
+git clone --single-branch --branch "v%PKG_VERSION%" https://github.com/lightvector/KataGo.git katago
+cd katago
 if errorlevel 1 exit 1
 
 if "%cuda_compiler_version%" == "None" (
