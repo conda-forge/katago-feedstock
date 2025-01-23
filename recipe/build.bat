@@ -1,5 +1,9 @@
 @echo On
 
+:: Clone the specific branch of the repository
+git clone --single-branch --branch "v%PKG_VERSION%" https://github.com/lightvector/KataGo.git .
+if errorlevel 1 exit 1
+
 if "%cuda_compiler_version%" == "None" (
     set build_with_cuda=
     set USE_CUDA=0
