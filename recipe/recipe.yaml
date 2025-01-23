@@ -59,9 +59,6 @@ requirements:
     - eigen
     # necessary for BUILD_DISTRIBUTED
     - openssl
-  run:
-    - if: cuda == "true"
-      then: ${{ pin_compatible('cudnn') }}
 
 tests:
   - files:
