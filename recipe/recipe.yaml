@@ -11,14 +11,13 @@ package:
   name: ${{ name|lower }}
   version: ${{ version }}
 
-# NOTE: Disabling since it fails on Windows and replacing by bit cloning during the build for the moment.
-# source:
-#   # use git_url, because katago needs a git repo to compile BUILD_DISTRIBUTED support;
-#   # this cannot (or rather: should not) be patch out, or even patched at all (-> dirty tag),
-#   # compare the exceedingly clear instructions/pleas here:
-#   # https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed
-#   git: https://github.com/lightvector/KataGo.git
-#   tag: v${{ version }}
+source:
+  # use git_url, because katago needs a git repo to compile BUILD_DISTRIBUTED support;
+  # this cannot (or rather: should not) be patch out, or even patched at all (-> dirty tag),
+  # compare the exceedingly clear instructions/pleas here:
+  # https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed
+  git: https://github.com/lightvector/KataGo.git
+  tag: v${{ version }}
 
 build:
   number: 1
