@@ -37,7 +37,6 @@ requirements:
     - if: cuda == "true"
       then:
         - ${{ compiler('cuda') }}
-        - cuda-version ==${{ cuda_compiler_version }}
         - libcublas-dev
 
     - ${{ compiler('c') }}
