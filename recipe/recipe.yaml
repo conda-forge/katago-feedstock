@@ -64,8 +64,9 @@ requirements:
 tests:
   - files:
       source:
-        - cpp/tests/
+        - katago/cpp/tests/ # NOTE: remove subfolder once we dont git clone during build
     script:
+      - cd katago # NOTE: remove subfolder once we dont git clone during build
       - katago
       - katago version
 
