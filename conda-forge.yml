@@ -5,7 +5,7 @@ conda_forge_output_validation: true
 conda_build:
   pkg_format: '2'
 conda_build_tool: rattler-build
-conda_install_tool: conda
+conda_install_tool: micromamba
 build_platform:
   osx_arm64: osx_64
   linux_aarch64: linux_64
