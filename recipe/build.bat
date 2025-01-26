@@ -2,7 +2,6 @@
 
 if "%cuda_compiler_version%" == "None" (
     set build_with_cuda=
-    set USE_CUDA=0
     set KATAGO_BACKEND="EIGEN"
 ) else (
     set build_with_cuda=1
@@ -60,7 +59,7 @@ if errorlevel 1 exit 1
 
 :: Download latest NN
 set KATAGO_WEIGTHS_DIR="%LIBRARY_PREFIX%\var\weights\"
-set KATAGO_WEIGTHS_NAME="kata1-b40c256-s11840935168-d2898845681.bin.gz"
+set KATAGO_WEIGTHS_NAME="kata1-b28c512nbt-s8209287936-d4596492266.bin.gz"
 curl https://media.katagotraining.org/uploaded/networks/models/kata1/%KATAGO_WEIGTHS_NAME% --output %KATAGO_WEIGTHS_NAME%
 if errorlevel 1 exit 1
 
