@@ -1,27 +1,31 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '11'
+- '13'
+c_stdlib:
+- sysroot
+c_stdlib_version:
+- '2.17'
 cdt_name:
-- cos7
+- conda
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 cuda_compiler:
-- nvcc
+- cuda-nvcc
 cuda_compiler_version:
-- '11.8'
+- '12.6'
 cudnn:
-- '8'
+- '9'
 curl:
 - '8'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '11'
+- '13'
 docker_image:
-- quay.io/condaforge/linux-anvil-cuda:11.8
+- quay.io/condaforge/linux-anvil-x86_64:alma9
 libzip:
 - '1'
 nccl:
@@ -35,7 +39,6 @@ zip_keys:
   - cxx_compiler_version
   - cuda_compiler
   - cuda_compiler_version
-  - cdt_name
   - docker_image
 zlib:
-- '1.2'
+- '1'
