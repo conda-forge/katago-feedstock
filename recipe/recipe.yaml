@@ -21,6 +21,12 @@ source:
 
   url: https://github.com/lightvector/KataGo/archive/refs/tags/v${{ version }}.zip
   sha256: 8bd0eb1e4d6533cc7ca116e957d86026fb2d3ecf4a57e9974984dbbc4cecd3b3
+  patches:
+    # Katago is being built with the distributed option enabled, which requires a git repo
+    # to be present (see https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed).
+    # But using a git source with v1 recipe trigger an error (see https://github.com/conda-forge/conda-smithy/issues/2239).
+    # In consequence, for now we must stick to using the url as a source. We then apply the below patch in order to adapt the CMake logic to not use `git`.
+    - no-git.patch
 
 build:
   number: 1
@@ -47,7 +53,7 @@ requirements:
     - cmake
     - ninja
     - curl
-    - ${{ "git" if unix else "m2-git" }}
+    # - git  # not needed at the moment, see `source.patches`` section
   host:
     - if: cuda == "true"
       then:
