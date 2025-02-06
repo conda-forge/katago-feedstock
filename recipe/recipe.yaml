@@ -12,6 +12,7 @@ package:
   version: ${{ version }}
 
 source:
+  # NOTE: The below block using git as a source is disabled for now, see `source.patches` section.
   # use git_url, because katago needs a git repo to compile BUILD_DISTRIBUTED support;
   # this cannot (or rather: should not) be patch out, or even patched at all (-> dirty tag),
   # compare the exceedingly clear instructions/pleas here:
@@ -26,10 +27,14 @@ source:
     # to be present (see https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed).
     # But using a git source with v1 recipe trigger an error (see https://github.com/conda-forge/conda-smithy/issues/2239).
     # In consequence, for now we must stick to using the url as a source. We then apply the below patch in order to adapt the CMake logic to not use `git`.
+    # Important: for every update, you must update the patch to match sha256sum for this version.
+    # Related feedstock tickets:
+    # - https://github.com/conda-forge/katago-feedstock/pull/13
+    # - https://github.com/conda-forge/katago-feedstock/pull/11
     - no-git.patch
 
 build:
-  number: 1
+  number: 0
   skip:
     # - cuda == "true" and win
     - cuda == "true" and match(cuda_compiler_version, "<12")
