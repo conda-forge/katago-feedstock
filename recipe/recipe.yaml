@@ -34,7 +34,7 @@ source:
   #   - no-git.patch
 
 build:
-  number: 0
+  number: 1
   skip:
     # - cuda == "true" and win
     - cuda == "true" and match(cuda_compiler_version, "<12")
