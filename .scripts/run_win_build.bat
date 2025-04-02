@@ -34,6 +34,7 @@ if "%PIXI_CACHE_DIR%"=="%MINIFORGE_HOME%" (
     pushd "%REPO_ROOT%"
 )
 move /y pixi.toml pixi.toml.bak
+pixi config set --local run-post-link-scripts insecure
 set "arch=64"
 if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "arch=arm64"
 powershell -NoProfile -ExecutionPolicy unrestricted -Command "(Get-Content pixi.toml.bak -Encoding UTF8) -replace 'platforms = .*', 'platforms = [''win-%arch%'']' | Out-File pixi.toml -Encoding UTF8"
