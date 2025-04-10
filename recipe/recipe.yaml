@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: katago
-  version: 1.15.3
+  version: "1.16.0"
   cuda: ${{ "true" if cuda_compiler_version != "None" else "false" }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
   string_prefix: ${{ cuda_build_string if cuda == "true" else "cpu_" }}
@@ -21,7 +21,7 @@ source:
   # tag: v${{ version }}
 
   url: https://github.com/lightvector/KataGo/archive/refs/tags/v${{ version }}.zip
-  sha256: 8bd0eb1e4d6533cc7ca116e957d86026fb2d3ecf4a57e9974984dbbc4cecd3b3
+  sha256: 78ca46d0f7d65400b8332b27821b2845c2fe7b3207a26c5eb9dc4b9d75a7dfd8
   patches:
     # Katago is being built with the distributed option enabled, which requires a git repo
     # to be present (see https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed).
@@ -100,7 +100,7 @@ tests:
         then:
           - cd cpp/
           - mkdir tests\scratch
-          - - ${{ "katago runtinynntests tests/scratch 1.0" if cuda != "true" }}
+          -   - ${{ "katago runtinynntests tests/scratch 1.0" if cuda != "true" }}
 
 about:
   summary: GTP engine and self-play learning in Go
