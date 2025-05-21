@@ -46,7 +46,7 @@ requirements:
     - cmake
     - ninja
     - curl
-    - git
+    - m2-git
   host:
     - if: cuda == "true"
       then:
