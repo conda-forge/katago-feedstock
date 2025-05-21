@@ -23,7 +23,7 @@ source:
 build:
   number: 0
   skip:
-    # - cuda == "true" and win
+    - not win
     - cuda == "true" and match(cuda_compiler_version, "<12")
   string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
   variant:
