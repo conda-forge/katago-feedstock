@@ -25,24 +25,12 @@ description = "List contents of all packages found in rattler-build build direct
 [tasks.build]
 cmd = "rattler-build build --recipe recipe"
 description = "Build katago-feedstock directly (without setup scripts), no particular variant specified"
-[tasks."build-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6.yaml"
-description = "Build katago-feedstock with variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6 directly (without setup scripts)"
-[tasks."inspect-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6.yaml"
-description = "List contents of katago-feedstock packages built for variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6"
 [tasks."build-win_64_cuda_compilerNonecuda_compiler_versionNone"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNone.yaml"
 description = "Build katago-feedstock with variant win_64_cuda_compilerNonecuda_compiler_versionNone directly (without setup scripts)"
 [tasks."inspect-win_64_cuda_compilerNonecuda_compiler_versionNone"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNone.yaml"
 description = "List contents of katago-feedstock packages built for variant win_64_cuda_compilerNonecuda_compiler_versionNone"
-[tasks."build-win_64_cuda_compilernvcccuda_compiler_version11.8"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilernvcccuda_compiler_version11.8.yaml"
-description = "Build katago-feedstock with variant win_64_cuda_compilernvcccuda_compiler_version11.8 directly (without setup scripts)"
-[tasks."inspect-win_64_cuda_compilernvcccuda_compiler_version11.8"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilernvcccuda_compiler_version11.8.yaml"
-description = "List contents of katago-feedstock packages built for variant win_64_cuda_compilernvcccuda_compiler_version11.8"
 
 [feature.smithy.dependencies]
 conda-smithy = "*"
