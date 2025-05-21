@@ -45,7 +45,7 @@ requirements:
     - cmake
     - ninja
     - curl
-    # - git  # not needed at the moment, see `source.patches`` section
+    - git
   host:
     - if: cuda == "true"
       then:
