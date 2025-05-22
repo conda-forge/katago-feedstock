@@ -37,6 +37,9 @@ move /y pixi.toml pixi.toml.bak
 set "arch=64"
 if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "arch=arm64"
 powershell -NoProfile -ExecutionPolicy unrestricted -Command "(Get-Content pixi.toml.bak -Encoding UTF8) -replace 'platforms = .*', 'platforms = [''win-%arch%'']' | Out-File pixi.toml -Encoding UTF8"
+:: Git on Windows needs to run post link scripts to properly set up SSL certificates
+pixi config set --global run-post-link-scripts insecure
+if !errorlevel! neq 0 exit /b !errorlevel!
 pixi install
 if !errorlevel! neq 0 exit /b !errorlevel!
 pixi list
@@ -49,6 +52,15 @@ if !errorlevel! neq 0 exit /b !errorlevel!
 move /y pixi.toml.bak pixi.toml
 popd
 call :end_group
+
+
+where git
+
+git clone --progress -n https://github.com/lightvector/KataGo.git ./checkout
+@REM pushd checkout
+@REM git fetch --no-tags --force --update-head-ok https://github.com/lightvector/KataGo.git refs/tags/v1.16.0:refs/tags/v1.16.0
+git rev-parse "refs/tags/v1.16.0"
+
 
 call :start_group "Configuring conda"
 
