@@ -57,7 +57,7 @@ call :end_group
 where git
 
 git clone --progress -n https://github.com/lightvector/KataGo.git ./checkout
-@REM pushd checkout
+pushd checkout
 @REM git fetch --no-tags --force --update-head-ok https://github.com/lightvector/KataGo.git refs/tags/v1.16.0:refs/tags/v1.16.0
 git rev-parse "refs/tags/v1.16.0^{commit}"
 
