@@ -2,10 +2,11 @@ schema_version: 1
 
 context:
   name: katago
-  version: 1.15.3
-  cuda: ${{ "true" if cuda_compiler_version != "None" else "false" }}
+  version: "1.16.0"
+  build_number: 0
+  cuda: ${{ true if cuda_compiler_version != "None" else false }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
-  string_prefix: ${{ cuda_build_string if cuda == "true" else "cpu_" }}
+  string_prefix: ${{ cuda_build_string if cuda else "cpu_" }}
 
 package:
   name: ${{ name|lower }}
@@ -21,7 +22,7 @@ source:
   # tag: v${{ version }}
 
   url: https://github.com/lightvector/KataGo/archive/refs/tags/v${{ version }}.zip
-  sha256: 8bd0eb1e4d6533cc7ca116e957d86026fb2d3ecf4a57e9974984dbbc4cecd3b3
+  sha256: 78ca46d0f7d65400b8332b27821b2845c2fe7b3207a26c5eb9dc4b9d75a7dfd8
   patches:
     # Katago is being built with the distributed option enabled, which requires a git repo
     # to be present (see https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed).
@@ -34,21 +35,20 @@ source:
     - no-git.patch
 
 build:
-  number: 0
+  number: ${{ build_number }}
   skip:
-    # - cuda == "true" and win
-    - cuda == "true" and match(cuda_compiler_version, "<12")
+    - cuda and match(cuda_compiler_version, "<12")
   string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
   variant:
     use_keys:
       # use cuda from the variant config, e.g. to build multiple CUDA variants
-      - ${{ "cuda" if cuda == "true" }}
+      - ${{ "cuda" if cuda else "cpu" }}
     # this will down-prioritize the cuda variant versus other variants of the package
-    down_prioritize_variant: ${{ 1 if cuda == "true" else 0 }}
+    down_prioritize_variant: ${{ 1 if cuda else 0 }}
 
 requirements:
   build:
-    - if: cuda == "true"
+    - if: cuda
       then:
         - ${{ compiler('cuda') }}
 
@@ -60,7 +60,7 @@ requirements:
     - curl
     # - git  # not needed at the moment, see `source.patches`` section
   host:
-    - if: cuda == "true"
+    - if: cuda
       then:
         - cuda-version ==${{ cuda_compiler_version }}
         - libcublas-dev
@@ -84,7 +84,7 @@ tests:
 
       # fails some accuracy tests on osx
       - ${{ "katago runtests" if not osx }}
-      - ${{ "katago runnnlayertests" if cuda != "true" }}
+      - ${{ "katago runnnlayertests" if not cuda }}
 
       # run some tests that hopefully exercise the distributed code a bit as well
       # (based on searching "distributed" under cpp/tests and running the right portion)
@@ -94,13 +94,13 @@ tests:
           - cd cpp/
           - mkdir tests/scratch
           - katago runoutputtests
-          - ${{ "katago runtinynntests tests/scratch 1.0" if cuda != "true" }}
+          - ${{ "katago runtinynntests tests/scratch 1.0" if not cuda }}
 
       - if: win
         then:
           - cd cpp/
           - mkdir tests\scratch
-          - - ${{ "katago runtinynntests tests/scratch 1.0" if cuda != "true" }}
+          - ${{ "katago runtinynntests tests/scratch 1.0" if not cuda }}
 
 about:
   summary: GTP engine and self-play learning in Go
