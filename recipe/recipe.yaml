@@ -3,6 +3,7 @@ schema_version: 1
 context:
   name: katago
   version: "1.16.0"
+  build_number: 0
   cuda: ${{ true if cuda_compiler_version != "None" else false }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
   string_prefix: ${{ cuda_build_string if cuda else "cpu_" }}
@@ -34,7 +35,7 @@ source:
     - no-git.patch
 
 build:
-  number: 0
+  number: ${{ build_number }}
   skip:
     - cuda and match(cuda_compiler_version, "<12")
   string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
