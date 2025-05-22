@@ -45,7 +45,7 @@ requirements:
     - cmake
     - ninja
     - curl
-    - git
+    # - git
   host:
     - if: cuda
       then:
