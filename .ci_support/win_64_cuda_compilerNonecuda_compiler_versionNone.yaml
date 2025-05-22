@@ -10,6 +10,8 @@ cuda_compiler:
 - None
 cuda_compiler_version:
 - None
+cudnn:
+- '9'
 curl:
 - '8'
 cxx_compiler:
