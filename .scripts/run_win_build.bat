@@ -37,18 +37,32 @@ move /y pixi.toml pixi.toml.bak
 set "arch=64"
 if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "arch=arm64"
 powershell -NoProfile -ExecutionPolicy unrestricted -Command "(Get-Content pixi.toml.bak -Encoding UTF8) -replace 'platforms = .*', 'platforms = [''win-%arch%'']' | Out-File pixi.toml -Encoding UTF8"
+:: Git on Windows needs to run post link scripts to properly set up SSL certificates
+pixi config set --global run-post-link-scripts insecure
+if !errorlevel! neq 0 exit /b !errorlevel!
 pixi install
 if !errorlevel! neq 0 exit /b !errorlevel!
 pixi list
 if !errorlevel! neq 0 exit /b !errorlevel!
 set "ACTIVATE_PIXI=%TMP%\pixi-activate-%RANDOM%.bat"
-pixi shell-hook > "%ACTIVATE_PIXI%"
+    -hook > "%ACTIVATE_PIXI%"
 if !errorlevel! neq 0 exit /b !errorlevel!
 call "%ACTIVATE_PIXI%"
 if !errorlevel! neq 0 exit /b !errorlevel!
 move /y pixi.toml.bak pixi.toml
 popd
 call :end_group
+
+echo rattler-build is ready to use. You can execute it with 'rattler-build'.
+
+@REM where git
+
+@REM git clone --progress -n https://github.com/lightvector/KataGo.git ./checkout
+@REM pushd checkout
+@REM @REM git fetch --no-tags --force --update-head-ok https://github.com/lightvector/KataGo.git refs/tags/v1.16.0:refs/tags/v1.16.0
+@REM git rev-parse "refs/tags/v1.16.0^{commit}"
+@REM if !errorlevel! neq 0 exit /b !errorlevel!
+
 
 call :start_group "Configuring conda"
 
@@ -84,7 +98,7 @@ call :end_group
 
 :: Build the recipe
 echo Building recipe
-rattler-build.exe build --recipe "recipe" -m .ci_support\%CONFIG%.yaml %EXTRA_CB_OPTIONS% --target-platform %HOST_PLATFORM%
+%REPO_ROOT%\recipe\rattler-build.exe build --recipe "recipe" -m .ci_support\%CONFIG%.yaml %EXTRA_CB_OPTIONS% --target-platform %HOST_PLATFORM%
 if !errorlevel! neq 0 exit /b !errorlevel!
 
 call :start_group "Inspecting artifacts"
