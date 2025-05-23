@@ -54,13 +54,56 @@ popd
 call :end_group
 
 
-where git
+@rem Define variables
+set "ARTIFACT_URL=https://github.com/prefix-dev/rattler-build/actions/runs/15204734408/artifacts/3183284657"
+set "DOWNLOAD_PATH=%TEMP%\rattler-build.zip"
+set "EXTRACT_PATH=%TEMP%\rattler-build"
+set "RATTLER_BUILD_PATH=%EXTRACT_PATH%\rattler-build.exe"
 
-git clone --progress -n https://github.com/lightvector/KataGo.git ./checkout
-pushd checkout
-@REM git fetch --no-tags --force --update-head-ok https://github.com/lightvector/KataGo.git refs/tags/v1.16.0:refs/tags/v1.16.0
-git rev-parse "refs/tags/v1.16.0^{commit}"
-if !errorlevel! neq 0 exit /b !errorlevel!
+@rem Download the artifact (requires authentication or public access)
+@rem You may need to use a GitHub token for private repositories or artifacts
+echo Downloading rattler-build from %ARTIFACT_URL%...
+curl -L -o "%DOWNLOAD_PATH%" "%ARTIFACT_URL%"
+if %ERRORLEVEL% neq 0 (
+    echo Failed to download rattler-build.
+    exit /b 1
+)
+
+@rem Extract the zip file (Windows built-in extraction or use a tool like 7-Zip)
+echo Extracting rattler-build to %EXTRACT_PATH%...
+mkdir "%EXTRACT_PATH%"
+powershell -Command "Expand-Archive -Path '%DOWNLOAD_PATH%' -DestinationPath '%EXTRACT_PATH%' -Force"
+if %ERRORLEVEL% neq 0 (
+    echo Failed to extract rattler-build.
+    exit /b 1
+)
+
+@rem Set environment variable for rattler-build
+echo Setting environment variable for rattler-build...
+set "PATH=%PATH%;%EXTRACT_PATH%"
+setx RATTLER_BUILD "%RATTLER_BUILD_PATH%"
+if %ERRORLEVEL% neq 0 (
+    echo Failed to set environment variable.
+    exit /b 1
+)
+
+@rem Verify the setup
+echo Verifying rattler-build path...
+where rattler-build
+if %ERRORLEVEL% neq 0 (
+    echo rattler-build not found in PATH.
+    exit /b 1
+)
+
+echo rattler-build is ready to use. You can execute it with 'rattler-build'.
+
+@REM where git
+
+@REM git clone --progress -n https://github.com/lightvector/KataGo.git ./checkout
+@REM pushd checkout
+@REM @REM git fetch --no-tags --force --update-head-ok https://github.com/lightvector/KataGo.git refs/tags/v1.16.0:refs/tags/v1.16.0
+@REM git rev-parse "refs/tags/v1.16.0^{commit}"
+@REM if !errorlevel! neq 0 exit /b !errorlevel!
 
 
 call :start_group "Configuring conda"
