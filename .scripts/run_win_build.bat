@@ -45,55 +45,13 @@ if !errorlevel! neq 0 exit /b !errorlevel!
 pixi list
 if !errorlevel! neq 0 exit /b !errorlevel!
 set "ACTIVATE_PIXI=%TMP%\pixi-activate-%RANDOM%.bat"
-pixi shell-hook > "%ACTIVATE_PIXI%"
+    -hook > "%ACTIVATE_PIXI%"
 if !errorlevel! neq 0 exit /b !errorlevel!
 call "%ACTIVATE_PIXI%"
 if !errorlevel! neq 0 exit /b !errorlevel!
 move /y pixi.toml.bak pixi.toml
 popd
 call :end_group
-
-
-@rem Define variables
-set "ARTIFACT_URL=https://github.com/prefix-dev/rattler-build/actions/runs/15204734408/artifacts/3183284657"
-set "DOWNLOAD_PATH=%TEMP%\rattler-build.zip"
-set "EXTRACT_PATH=%TEMP%\rattler-build"
-set "RATTLER_BUILD_PATH=%EXTRACT_PATH%\rattler-build.exe"
-
-@rem Download the artifact (requires authentication or public access)
-@rem You may need to use a GitHub token for private repositories or artifacts
-echo Downloading rattler-build from %ARTIFACT_URL%...
-curl -L -o "%DOWNLOAD_PATH%" "%ARTIFACT_URL%"
-if %ERRORLEVEL% neq 0 (
-    echo Failed to download rattler-build.
-    exit /b 1
-)
-
-@rem Extract the zip file (Windows built-in extraction or use a tool like 7-Zip)
-echo Extracting rattler-build to %EXTRACT_PATH%...
-mkdir "%EXTRACT_PATH%"
-powershell -Command "Expand-Archive -Path '%DOWNLOAD_PATH%' -DestinationPath '%EXTRACT_PATH%' -Force"
-if %ERRORLEVEL% neq 0 (
-    echo Failed to extract rattler-build.
-    exit /b 1
-)
-
-@rem Set environment variable for rattler-build
-echo Setting environment variable for rattler-build...
-set "PATH=%PATH%;%EXTRACT_PATH%"
-setx RATTLER_BUILD "%RATTLER_BUILD_PATH%"
-if %ERRORLEVEL% neq 0 (
-    echo Failed to set environment variable.
-    exit /b 1
-)
-
-@rem Verify the setup
-echo Verifying rattler-build path...
-where rattler-build
-if %ERRORLEVEL% neq 0 (
-    echo rattler-build not found in PATH.
-    exit /b 1
-)
 
 echo rattler-build is ready to use. You can execute it with 'rattler-build'.
 
@@ -140,7 +98,7 @@ call :end_group
 
 :: Build the recipe
 echo Building recipe
-rattler-build.exe build --recipe "recipe" -m .ci_support\%CONFIG%.yaml %EXTRA_CB_OPTIONS% --target-platform %HOST_PLATFORM%
+%REPO_ROOT%\recipe\rattler-build.exe build --recipe "recipe" -m .ci_support\%CONFIG%.yaml %EXTRA_CB_OPTIONS% --target-platform %HOST_PLATFORM%
 if !errorlevel! neq 0 exit /b !errorlevel!
 
 call :start_group "Inspecting artifacts"
