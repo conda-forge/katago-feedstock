@@ -31,6 +31,11 @@ if [[ "$target_platform" == osx-* ]]; then
   test -f $PREFIX/lib/libatomic.a
 fi
 
+# Enable Metal on OSX
+if [[ "$target_platform" == osx-* ]]; then
+  export KATAGO_BACKEND="METAL"
+fi
+
 # Enable AVX2 on Linux and disable on OSX
 if [[ "$target_platform" == "linux-64" ]]; then
   export USE_AVX2=1
