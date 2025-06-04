@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: katago
-  version: "1.16.0"
+  version: "1.16.2"
   build_number: 0
   cuda: ${{ true if cuda_compiler_version != "None" else false }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
@@ -22,7 +22,7 @@ source:
   # tag: v${{ version }}
 
   url: https://github.com/lightvector/KataGo/archive/refs/tags/v${{ version }}.zip
-  sha256: 78ca46d0f7d65400b8332b27821b2845c2fe7b3207a26c5eb9dc4b9d75a7dfd8
+  sha256: b3b2997dda9cd4b4a6bba38a1255b46ba76182beaf1b3a60aca96b4ff820650d
   patches:
     # Katago is being built with the distributed option enabled, which requires a git repo
     # to be present (see https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed).
