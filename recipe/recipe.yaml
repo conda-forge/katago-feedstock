@@ -19,7 +19,9 @@ source:
   # compare the exceedingly clear instructions/pleas here:
   # https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed
   git: https://github.com/lightvector/KataGo.git
-  tag: v${{ version }}
+  # tag: v${{ version }}
+  # Git hash for v1.16.0
+  rev: f5756b1b6224500c1dd9ced62408a85766b5f45c
 
 build:
   number: ${{ build_number }}
