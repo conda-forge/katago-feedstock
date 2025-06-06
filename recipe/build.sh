@@ -1,9 +1,10 @@
 #!/bin/bash
 set -ex
 
-mkdir build
-cd build
+mkdir build/
+cd build/
 
+# Enable CUDA backend if CUDA is available
 if [[ ${cuda_compiler_version} != "None" ]]; then
   export KATAGO_BACKEND="CUDA"
   export NCCL_ROOT_DIR=$PREFIX
@@ -15,6 +16,11 @@ if [[ ${cuda_compiler_version} != "None" ]]; then
   export CUDNN_INCLUDE_DIR=$PREFIX/include
 else
   export KATAGO_BACKEND="EIGEN"
+fi
+
+# Enable METAL backend on macOS
+if [[ "$target_platform" == osx-* ]]; then
+  export KATAGO_BACKEND="METAL"
 fi
 
 # Fix -latomic on OSX

@@ -1,0 +1,10 @@
+c_stdlib:
+  - macosx_deployment_target   # [osx]
+c_stdlib_version:              # [unix]
+  - 13.3                       # [osx and x86_64]
+  - 13.3                       # [osx and arm64]
+
+# MACOSX_DEPLOYMENT_TARGET:      # [osx]
+#   - 11.0                       # [osx and arm64]
+#   - 10.13                      # [osx and x86_64]
+
