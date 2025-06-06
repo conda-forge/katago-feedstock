@@ -13,8 +13,7 @@ package:
   version: ${{ version }}
 
 source:
-  # NOTE: The below block using git as a source is disabled for now, see `source.patches` section.
-  # use git_url, because katago needs a git repo to compile BUILD_DISTRIBUTED support;
+  # NOTE: Use git as source because katago needs a git repo to compile BUILD_DISTRIBUTED support;
   # this cannot (or rather: should not) be patch out, or even patched at all (-> dirty tag),
   # compare the exceedingly clear instructions/pleas here:
   # https://github.com/lightvector/KataGo/blob/master/Compiling.md#building-for-distributed
