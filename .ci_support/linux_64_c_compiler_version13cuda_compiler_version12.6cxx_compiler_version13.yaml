@@ -6,8 +6,6 @@ c_stdlib:
 - sysroot
 c_stdlib_version:
 - '2.17'
-cdt_name:
-- conda
 channel_sources:
 - conda-forge
 channel_targets:
@@ -17,7 +15,7 @@ cuda_compiler:
 cuda_compiler_version:
 - '12.6'
 cudnn:
-- '9'
+- '9.10'
 curl:
 - '8'
 cxx_compiler:
@@ -31,14 +29,14 @@ libzip:
 nccl:
 - '2'
 openssl:
-- '3'
+- '3.5'
 target_platform:
-- linux-aarch64
+- linux-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-  - cuda_compiler
+  - c_stdlib_version
   - cuda_compiler_version
-  - docker_image
+  - cudnn
 zlib:
 - '1'
