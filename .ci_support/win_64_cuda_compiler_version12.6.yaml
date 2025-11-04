@@ -1,5 +1,5 @@
 c_compiler:
-- vs2019
+- vs2022
 c_stdlib:
 - vs
 channel_sources:
@@ -15,15 +15,15 @@ cudnn:
 curl:
 - '8'
 cxx_compiler:
-- vs2019
+- vs2022
 libzip:
 - '1'
 openssl:
-- '3'
+- '3.5'
 target_platform:
 - win-64
 zip_keys:
-- - cuda_compiler
-  - cuda_compiler_version
+- - cuda_compiler_version
+  - cudnn
 zlib:
 - '1'
